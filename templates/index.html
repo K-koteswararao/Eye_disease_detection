@@ -124,20 +124,37 @@
 
 <script>
         function showPredictPage() {
-            document.getElementById("predictPage").scrollIntoView({ behavior: "smooth" });
-        }
+    document.getElementById("predictPage").scrollIntoView({ behavior: "smooth" });
+}
 
-        function predictDisease() {
-            const fileInput = document.getElementById("fileInput").files.length;
-            const resultDiv = document.getElementById("result");
+function predictDisease() {
+    const fileInput = document.getElementById("fileInput");
+    const resultDiv = document.getElementById("result");
 
-            if (fileInput > 0) {
-                resultDiv.innerHTML = "Prediction: <span style='color:green;'>Normal</span>";
-            } else {
-                resultDiv.innerHTML = "<span style='color:red;'>Please upload a file!</span>";
-            }
-        }
+    if (fileInput.files.length === 0) {
+        resultDiv.innerHTML = "<span style='color:red;'>Please upload a file!</span>";
+        return;
+    }
+
+    let formData = new FormData();
+    formData.append("image", fileInput.files[0]);
+
+    fetch("/predict", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        resultDiv.innerHTML = `Prediction: <span style='color:green;'>${data.prediction}</span>`;
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        resultDiv.innerHTML = "<span style='color:red;'>Error in prediction. Try again!</span>";
+    });
+}
+
     </script>
+
 
     
 
