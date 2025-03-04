@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction</title>
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+	
+    
+</head>
+
+<body>
+
+    <!-- COMMON HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold text-light" href="#">Disease Prediction</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#" onclick="showPredictPage()">Predict</a>
+			
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END HEADER -->
+
+    <div id="sectionHomePage">
+        <div class="student-home-section pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-7 d-flex flex-column justify-content-center">
+                        <h1 class="student-home-section-heading">
+                            We're determined for your better life.
+                        </h1>
+                        <p class="student-home-section-description">
+                            You can get the care you need 24/7 - be it online or in person.
+			    you will treated by careing specalist doctors.
+                        </p>
+                        <div class="d-md-none">
+                            <img src="https://res.cloudinary.com/dtkhoengd/image/upload/v1695549660/students_jzj8ai.jpg"
+                                class="student-home-section-img" />
+                        </div>
+                        <div>
+                            <button class="custom-button" onclick="display('sectionPrimarySchoolCourse')">Predict</button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-5 d-none d-md-block">
+                        <img src="https://res.cloudinary.com/dtkhoengd/image/upload/v1695549660/students_jzj8ai.jpg"
+                            class="student-home-section-img" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div class="student-home2-section pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <div class="text-center">
+                            <img src="https://res.cloudinary.com/dtkhoengd/image/upload/v1695553308/student_reading_pflkbp.avif" class="student-home2-section-img" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <h1 class="student-home2-section-heading">
+                            Protect Your Vision Act early see the future
+                        </h1>
+                        <p class="student-home2-section-description">
+                            Glaucoma is one of the leading causes of blindness worldwide. Awareness and prevention are the keys to protecting your eyesight.
+                        </p>
+                        <button class="custom-button">Watch Video</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="sectionPrimarySchoolCourse">
+        <div class="explore-course-section pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="course-section-heading">Please Upload the Image Below</h1>
+                    </div>
+
+			
+<!-- Prediction Page -->
+    <div class="container" id="predictPage">
+        <h2>Upload Your File</h2>
+        <input type="file" id="fileInput">
+        <button onclick="predictDisease()">Predict</button>
+        <div id="result"></div>
+    </div>
+
+                    <button class="btn btn-dark ml-3" onclick="display('sectionHomePage')">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+        function showPredictPage() {
+            document.getElementById("predictPage").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function predictDisease() {
+            const fileInput = document.getElementById("fileInput").files.length;
+            const resultDiv = document.getElementById("result");
+
+            if (fileInput > 0) {
+                resultDiv.innerHTML = "Prediction: <span style='color:green;'>Normal</span>";
+            } else {
+                resultDiv.innerHTML = "<span style='color:red;'>Please upload a file!</span>";
+            }
+        }
+    </script>
+
+    
+
+	
+
+    <script type="text/javascript"
+        src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/js/ccbp-ui-kit.js"></script>
+</body>
+
+</html>
+
+
+
